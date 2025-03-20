@@ -1,59 +1,27 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
 
-export const authApi = createApi({
-  reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.BASE_URL}` }),
+export const api = createApi({
+  reducerPath: 'api', // Ensure this is defined
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }), // Adjust base URL
   endpoints: (builder) => ({
-    register: builder.mutation({
-      query: (userData) => ({
-        url: '/register',
-        method: 'POST',
-        body: userData,
-      }),
-    }),
-    verifyEmail: builder.mutation({
-      query: (verificationData) => ({
-        url: '/verify-email',
-        method: 'POST',
-        body: verificationData,
-      }),
-    }),
+    // Define your endpoints here
     login: builder.mutation({
       query: (credentials) => ({
-        url: '/login',
+        url: '/auth/login',
         method: 'POST',
         body: credentials,
       }),
     }),
-    requestPasswordReset: builder.mutation({
-      query: (email) => ({
-        url: '/request-reset',
+    signup: builder.mutation({
+      query: (userData) => ({
+        url: '/auth/register',
         method: 'POST',
-        body: { email },
+        body: userData,
       }),
     }),
-    verifyResetOTP: builder.mutation({
-      query: (otpData) => ({
-        url: '/verify-otp',
-        method: 'POST',
-        body: otpData,
-      }),
-    }),
-    resetPassword: builder.mutation({
-      query: (resetData) => ({
-        url: '/reset-password',
-        method: 'POST',
-        body: resetData,
-      }),
-    }),
+    // Add more endpoints as needed
   }),
 });
 
-export const {
-  useRegisterMutation,
-  useVerifyEmailMutation,
-  useLoginMutation,
-  useRequestPasswordResetMutation,
-  useVerifyResetOTPMutation,
-  useResetPasswordMutation,
-} = authApi;
+// Export the auto-generated hooks
+export const { useLoginMutation, useSignupMutation } = api;
