@@ -6,7 +6,10 @@ const UserSchema = new mongoose.Schema({
   password: { type: String },
   googleId: { type: String },
   isVerified: { type: Boolean, default: false },
-  verificationCode: { type: String },
+  verificationCode: { type: String }, // Email verification code
+  resetOTP: { type: String }, // OTP for password reset
+  resetOTPExpires: { type: Date }, // Expiration time for OTP
+  isOTPVerified: { type: Boolean, default: false }, // Track OTP verification
 });
 
 module.exports = mongoose.model("User", UserSchema);

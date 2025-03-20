@@ -1,7 +1,14 @@
 const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const { register, verifyEmail, login, resetPassword } = require("../controllers/authController");
+const {
+  register,
+  verifyEmail,
+  login,
+  requestPasswordReset,
+  verifyResetOTP,
+  resetPassword,
+} = require("../controllers/authController");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
@@ -10,6 +17,8 @@ const router = express.Router();
 router.post("/register", register);
 router.post("/verify-email", verifyEmail);
 router.post("/login", login);
+router.post("/request-reset", requestPasswordReset); // ✅ Fix: Function name corrected
+router.post("/verify-otp", verifyResetOTP); // ✅ New Route: Verify OTP
 router.post("/reset-password", resetPassword);
 
 // Google Authentication
@@ -22,12 +31,17 @@ router.get(
     if (!req.user) {
       return res.status(401).json({ msg: "Authentication failed" });
     }
-    const thirtyDaysInSeconds = 30 * 24 * 60 * 60;
-    // Generate a JWT token for authenticated user
-    const token = jwt.sign({ userId: req.user.id }, process.env.JWT_SECRET, { expiresIn: thirtyDaysInSeconds });
 
-    // Redirect with token (modify as needed for frontend compatibility)
-    res.redirect(`http://localhost:5173/dashboard?token=${token}`);
+    const token = jwt.sign({ userId: req.user.id }, process.env.JWT_SECRET, { expiresIn: "30d" });
+
+    // Set token in a secure httpOnly cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
+
+    res.redirect("http://localhost:5173/dashboard"); // Redirect frontend to dashboard
   }
 );
 
