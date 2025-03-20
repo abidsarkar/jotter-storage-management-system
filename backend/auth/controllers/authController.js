@@ -25,7 +25,11 @@ const sendEmail = async (email, subject, htmlContent) => {
 
 // 📌 Load Email Templates
 const loadTemplate = (templateName, replacements) => {
-  let templatePath = path.join(__dirname, "../emailTemplate", `${templateName}.html`);
+  let templatePath = path.join(
+    __dirname,
+    "../emailTemplate",
+    `${templateName}.html`
+  );
   let emailTemplate = fs.readFileSync(templatePath, "utf8");
 
   Object.keys(replacements).forEach((key) => {
@@ -47,7 +51,9 @@ exports.register = async (req, res) => {
       return res.status(400).json({ msg: "Email is already registered" });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
 
     const newUser = new User({
       username,
@@ -59,7 +65,9 @@ exports.register = async (req, res) => {
     await newUser.save();
 
     // Load & send verification email
-    const emailContent = loadTemplate("verificationTemplate", { VERIFICATION_CODE: verificationCode });
+    const emailContent = loadTemplate("verificationTemplate", {
+      VERIFICATION_CODE: verificationCode,
+    });
     await sendEmail(email, "Verify Your Email - Jotter Storage", emailContent);
 
     res.status(201).json({ msg: "User registered, verify your email" });
@@ -73,15 +81,23 @@ exports.verifyEmail = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user || user.verificationCode !== code)
-    return res.status(400).json({ msg: "Invalid or expired verification code" });
+    return res
+      .status(400)
+      .json({ msg: "Invalid or expired verification code" });
 
   user.isVerified = true;
   user.verificationCode = null;
   await user.save();
 
   // Load & send confirmation email
-  const emailContent = loadTemplate("confirmationTemplate", { USERNAME: user.username });
-  await sendEmail(email, "Your Account is Verified - Jotter Storage", emailContent);
+  const emailContent = loadTemplate("confirmationTemplate", {
+    USERNAME: user.username,
+  });
+  await sendEmail(
+    email,
+    "Your Account is Verified - Jotter Storage",
+    emailContent
+  );
 
   res.status(200).json({ msg: "Email verified successfully" });
 };
@@ -97,14 +113,23 @@ exports.login = async (req, res) => {
   if (!user.isVerified)
     return res.status(403).json({ msg: "Verify your email before logging in" });
 
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
   res.status(200).json({ token, msg: "Login successful" });
 };
 
 // 🔹 Request Password Reset (Send OTP)
 exports.requestPasswordReset = async (req, res) => {
   const { email } = req.body;
-  const user = await User.findOne({ email });
+
+  // Validate email
+  if (!email || typeof email !== "string") {
+    return res.status(400).json({ msg: "Invalid email format" });
+  }
+
+  const trimmedEmail = email.trim(); // Trim the email
+  const user = await User.findOne({ email: trimmedEmail });
 
   if (!user) return res.status(404).json({ msg: "User not found" });
 
@@ -115,12 +140,13 @@ exports.requestPasswordReset = async (req, res) => {
   await user.save();
 
   // Load & send OTP email
-  const emailContent = loadTemplate("resetPasswordTemplate", { RESET_OTP: resetOTP });
-  await sendEmail(email, "Reset Your Password - Jotter Storage", emailContent);
+  const emailContent = loadTemplate("resetPasswordTemplate", {
+    RESET_OTP: resetOTP,
+  });
+  await sendEmail(trimmedEmail, "Reset Your Password - Jotter Storage", emailContent);
 
   res.status(200).json({ msg: "OTP sent to email. Valid for 10 minutes." });
 };
-
 // 🔹 Verify OTP for Password Reset
 exports.verifyResetOTP = async (req, res) => {
   const { email, otp } = req.body;
@@ -128,9 +154,11 @@ exports.verifyResetOTP = async (req, res) => {
 
   if (!user) return res.status(404).json({ msg: "User not found" });
 
-  if (user.resetOTP !== otp) return res.status(400).json({ msg: "Invalid OTP" });
+  if (user.resetOTP !== otp)
+    return res.status(400).json({ msg: "Invalid OTP" });
 
-  if (new Date() > user.resetOTPExpires) return res.status(400).json({ msg: "OTP expired" });
+  if (new Date() > user.resetOTPExpires)
+    return res.status(400).json({ msg: "OTP expired" });
 
   user.isOTPVerified = true;
   await user.save();

@@ -1,27 +1,60 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const api = createApi({
-  reducerPath: 'api', // Ensure this is defined
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }), // Adjust base URL
+export const authApi = createApi({
+  reducerPath: "authApi",
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
+
   endpoints: (builder) => ({
-    // Define your endpoints here
-    login: builder.mutation({
-      query: (credentials) => ({
-        url: '/auth/login',
-        method: 'POST',
-        body: credentials,
-      }),
-    }),
-    signup: builder.mutation({
+    register: builder.mutation({
       query: (userData) => ({
-        url: '/auth/register',
-        method: 'POST',
+        url: "/register",
+        method: "POST",
         body: userData,
       }),
     }),
-    // Add more endpoints as needed
+    verifyEmail: builder.mutation({
+      query: (verificationData) => ({
+        url: "/verify-email",
+        method: "POST",
+        body: verificationData,
+      }),
+    }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/login",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
+    requestPasswordReset: builder.mutation({
+      query: (email) => ({
+        url: "/request-reset",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    verifyResetOTP: builder.mutation({
+      query: (otpData) => ({
+        url: "/verify-otp",
+        method: "POST",
+        body: otpData,
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (resetData) => ({
+        url: "/reset-password",
+        method: "POST",
+        body: resetData,
+      }),
+    }),
   }),
 });
 
-// Export the auto-generated hooks
-export const { useLoginMutation, useSignupMutation } = api;
+export const {
+  useRegisterMutation,
+  useVerifyEmailMutation,
+  useLoginMutation,
+  useRequestPasswordResetMutation,
+  useVerifyResetOTPMutation,
+  useResetPasswordMutation,
+} = authApi;

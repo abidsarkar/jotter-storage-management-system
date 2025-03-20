@@ -4,14 +4,14 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 import { store } from "./store/store.js";
-import { authApi } from "./store/api.js";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
+import { Provider } from "react-redux";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ApiProvider api={authApi}>
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </ApiProvider>
+    </Provider>
   </StrictMode>
 );

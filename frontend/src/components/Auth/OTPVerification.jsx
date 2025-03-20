@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 import { useVerifyResetOTPMutation } from "../../store/api";
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 
 const OTPVerification = () => {
   const [otp, setOtp] = useState('');
   const [verifyResetOTP, { isLoading }] = useVerifyResetOTPMutation();
   const navigate = useNavigate();
+  const location = useLocation(); // Get email from navigation state
+  const email = location.state?.email; // Retrieve email
+
+  if (!email) {
+    console.error("No email provided for OTP verification.");
+    return <p className="text-red-600 text-center">Invalid request. No email found.</p>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await verifyResetOTP({ email: 'user@example.com', otp }).unwrap();
+      const response = await verifyResetOTP({ email, otp }).unwrap();
       console.log('OTP verified:', response);
-      navigate('/reset-password');
+      navigate('/reset-password', { state: { email } }); // Pass email to the next page
     } catch (err) {
       console.error('OTP verification failed:', err);
     }

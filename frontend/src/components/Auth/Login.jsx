@@ -8,6 +8,7 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
+  // Handle email/password login
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,6 +18,12 @@ const Login = () => {
     } catch (err) {
       console.error('Login failed:', err);
     }
+  };
+
+  // Handle Google OAuth login
+  const handleGoogleLogin = () => {
+    // Redirect the user to the backend Google OAuth endpoint
+    window.location.href = 'http://localhost:5000/api/auth/google';
   };
 
   return (
@@ -56,6 +63,14 @@ const Login = () => {
         className="text-blue-600 text-sm mt-2"
       >
         Don't have an account? Sign Up
+      </button>
+
+      {/* Google OAuth Button */}
+      <button
+        onClick={handleGoogleLogin}
+        className="w-full max-w-xs bg-red-600 text-white p-2 rounded-lg mt-4 hover:bg-red-700 transition duration-300"
+      >
+        Sign in with Google
       </button>
     </div>
   );

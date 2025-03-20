@@ -1,25 +1,36 @@
 import React, { useState } from 'react';
 import { useResetPasswordMutation } from '../../store/api';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email; // Retrieve email
+
+  if (!email) {
+    console.error("No email provided for password reset.");
+    return <p className="text-red-600 text-center">Invalid request. No email found.</p>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+      setError("Passwords do not match.");
       return;
     }
+
     try {
-      const response = await resetPassword({ email: 'user@example.com', newPassword, confirmPassword }).unwrap();
+      const response = await resetPassword({ email, newPassword, confirmPassword }).unwrap();
       console.log('Password reset successful:', response);
       navigate('/login');
     } catch (err) {
-      console.error('Password reset failed:', err);
+      setError(err?.data?.message || "Password reset failed. Please try again.");
     }
   };
 
@@ -32,7 +43,7 @@ const ResetPassword = () => {
           placeholder="New Password"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
+          className="w-full p-2 mb-2 border border-gray-300 rounded-lg"
         />
         <input
           type="password"
@@ -41,6 +52,7 @@ const ResetPassword = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
         />
+        {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
         <button
           type="submit"
           disabled={isLoading}
