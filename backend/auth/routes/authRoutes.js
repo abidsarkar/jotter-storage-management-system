@@ -32,14 +32,14 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("/dashboard");
+    res.redirect("http://localhost:5173/dashboard"); // ✅ Redirect to frontend
   }
 );
 
 router.get("/logout", (req, res) => {
   req.logOut((err) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.redirect("/");
+    res.redirect("http://localhost:5173");
   });
 });
 router.get("/user",(req,res)=>{
