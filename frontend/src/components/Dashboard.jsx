@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { useGetUserQuery } from '../store/api';
 import LogoutButton from './Auth/LogoutButton ';
+import StorageStats from './folder/StorageStats';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const Dashboard = () => {
           className="w-20 h-20 rounded-full mt-4"
         />
       )}
+      
       {/* Use the LogoutButton component */}
       <LogoutButton />
     </div>

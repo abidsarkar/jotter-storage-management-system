@@ -9,6 +9,7 @@ import OTPVerification from './components/Auth/OTPVerification';
 import ResetPassword from './components/Auth/ResetPassword';
 import VerifyEmail from './components/Auth/VerifyEmail';
 import Dashboard from './components/Dashboard';
+import StorageStats from './components/folder/StorageStats';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/abcd" element={<StorageStats />} />
 
       {/* Fallback Route */}
       <Route path="*" element={<Navigate to="/" replace />} />

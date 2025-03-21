@@ -45,6 +45,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/api/auth", authRoutes);
+const fileRoutes = require("./fileSystem/routes/fileRoutes"); // Import file routes
+
+app.use("/api/files", fileRoutes); // Add file routes
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
