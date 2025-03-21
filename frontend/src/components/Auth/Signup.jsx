@@ -30,7 +30,7 @@ const Signup = () => {
 
     try {
       const response = await register({ username, email, password, confirmPassword }).unwrap();
-      console.log("Registration successful:", response);
+      // console.log("Registration successful:", response);
       navigate("/verify-email", { state: { email } });
     } catch (err) {
       setError(err?.data?.message || "Registration failed. Please try again.");

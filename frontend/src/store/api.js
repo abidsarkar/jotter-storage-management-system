@@ -2,7 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_BASE_URL,
+    credentials: "include", // Include cookies with every request
+  }),
 
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -47,6 +50,28 @@ export const authApi = createApi({
         body: resetData,
       }),
     }),
+    // Add this new endpoint to fetch the logged-in user's information
+    getUser: builder.query({
+      query: () => ({
+        url: "/profile",
+        method: "GET",
+        credentials:"include",
+      }),
+    }),
+    googleLogin: builder.query({
+      query: () => ({
+        url: "/google",
+        method: "GET",
+      }),
+    }),
+    // Logout
+    logout: builder.mutation({
+      query: () => ({
+        url: "/logout",
+        method: "GET",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -57,4 +82,7 @@ export const {
   useRequestPasswordResetMutation,
   useVerifyResetOTPMutation,
   useResetPasswordMutation,
+  useGetUserQuery,
+  useGoogleLoginQuery,
+  useLogoutMutation,
 } = authApi;

@@ -1,16 +1,24 @@
 import React from 'react';
+import { useGetUserQuery } from '../../../store/api';
+
 
 const GoogleLoginButton = () => {
+  const { data, isLoading, isError } = useGetUserQuery();
+
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:5000/api/auth/google';
+    // Redirect to the Google login endpoint
+    window.location.href = `${import.meta.env.VITE_BASE_URL}/google`;
   };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>Error loading Google login</p>;
 
   return (
     <button
       onClick={handleGoogleLogin}
-      className="w-full max-w-xs bg-red-600 text-white p-2 rounded-lg mt-4 hover:bg-red-700 transition duration-300"
+      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300"
     >
-      Sign in with Google
+      Login with Google
     </button>
   );
 };
