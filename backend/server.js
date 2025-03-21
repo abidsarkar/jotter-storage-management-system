@@ -11,25 +11,34 @@ require("dotenv").config();
 connectDB();
 
 const app = express();
-app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173", credentials: true })); // Allow frontend requests
-//google login
-app.use(cors({ origin: process.env.GOOGLE_CLIENT_ID, credentials: true }));
+
+// Fix CORS issues
 app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI, // Your MongoDB connection URI
-        ttl: 14 * 24 * 60 * 60, // Session expiration time (14 days)
-      }),
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
-        httpOnly: true,
-      },
-    })
-  );
+  cors({
+    origin: "http://localhost:5173", // Allow frontend requests
+    credentials: true, // Allow cookies & session
+  })
+);
+
+app.use(express.json());
+
+// Session middleware
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI, // Your MongoDB connection URI
+      ttl: 14 * 24 * 60 * 60, // Session expiration time (14 days)
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      httpOnly: true,
+      sameSite: "Lax",
+    },
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

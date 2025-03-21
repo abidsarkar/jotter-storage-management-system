@@ -35,13 +35,18 @@ router.get(
     res.redirect("http://localhost:5173/dashboard"); // ✅ Redirect to frontend
   }
 );
-
+//google logout
 router.get("/logout", (req, res) => {
-  req.logOut((err) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.redirect("http://localhost:5173");
+  req.logout((err) => {
+    if (err) return res.status(500).json({ error: "Logout failed" });
+
+    req.session.destroy(() => {
+      res.clearCookie("connect.sid", { path: "/", httpOnly: true, sameSite: "Lax" });
+      return res.status(200).json({ message: "Logged out successfully" });
+    });
   });
 });
+
 router.get("/user",(req,res)=>{
   res.json(req.user || null);
 })

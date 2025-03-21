@@ -1,13 +1,23 @@
-import React from 'react';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router';
+import React from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router";
+import axios from "axios";
 
 const GoogleLogoutButton = () => {
   const navigate = useNavigate();
 
-  const handleGoogleLogout = () => {
-    Cookies.remove('token'); // Remove token from cookies
-    window.location.href = 'http://localhost:5000/api/auth/logout'; // Redirect to logout endpoint
+  const handleGoogleLogout = async () => {
+    try {
+      await axios.get("http://localhost:5000/api/auth/logout", { withCredentials: true });
+
+      // Remove token from cookies
+      Cookies.remove("token");
+
+      // Redirect to login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
