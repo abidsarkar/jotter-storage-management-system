@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLoginMutation } from '../../store/api';
 import { useNavigate } from 'react-router';
+import Cookies from 'js-cookie';
+import GoogleLoginButton from './Google/GoogleLoginButton';
+ // Import Google login button
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,7 +11,6 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
-  // Handle email/password login
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -20,11 +22,16 @@ const Login = () => {
     }
   };
 
-  // Handle Google OAuth login
-  const handleGoogleLogin = () => {
-    // Redirect the user to the backend Google OAuth endpoint
-    window.location.href = 'http://localhost:5000/api/auth/google';
+  const checkAuth = () => {
+    const token = Cookies.get('token');
+    if (token) {
+      navigate('/dashboard');
+    }
   };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
@@ -65,13 +72,8 @@ const Login = () => {
         Don't have an account? Sign Up
       </button>
 
-      {/* Google OAuth Button */}
-      <button
-        onClick={handleGoogleLogin}
-        className="w-full max-w-xs bg-red-600 text-white p-2 rounded-lg mt-4 hover:bg-red-700 transition duration-300"
-      >
-        Sign in with Google
-      </button>
+      {/* Google OAuth Button Component */}
+      <GoogleLoginButton />
     </div>
   );
 };

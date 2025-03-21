@@ -1,31 +1,50 @@
 const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const User = require("../models/User");
-require("dotenv").config();
+const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
+const dotenv = require("dotenv");
+const User = require("../models/User.js");
+const jwt = require("jsonwebtoken");
+dotenv.config();
 
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/auth/google/callback",
+      callbackURL: process.env.GOOGLE_CALLBACK_URL || "http://localhost:5000/api/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-      let user = await User.findOne({ googleId: profile.id });
+      try {
+        if (!profile.emails || profile.emails.length === 0) {
+          return done(new Error("No email found in Google profile"), null);
+        }
 
-      if (!user) {
-        user = await User.create({ googleId: profile.id, username: profile.displayName, email: profile.emails[0].value, isVerified: true });
+        let user = await User.findOne({ googleId: profile.id });
+
+        if (!user) {
+          user = await User.create({
+            googleId: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value, // Ensure this exists
+            profilePicture: profile.photos && profile.photos.length > 0 ? profile.photos[0].value : "",
+          });
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error, null);
       }
-
-      done(null, user);
     }
   )
 );
-
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  return done(null, user);
 });
-
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => done(err, user));
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (error) {
+    done(error, null);
+  }
 });
+module.exports = passport;

@@ -10,6 +10,7 @@ const UserSchema = new mongoose.Schema({
   resetOTP: { type: String }, // OTP for password reset
   resetOTPExpires: { type: Date }, // Expiration time for OTP
   isOTPVerified: { type: Boolean, default: false }, // Track OTP verification
+  profilePicture:{type:String,default:""},
 });
 
 module.exports = mongoose.model("User", UserSchema);

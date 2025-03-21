@@ -22,32 +22,27 @@ router.post("/verify-otp", verifyResetOTP); // ✅ New Route: Verify OTP
 router.post("/reset-password", resetPassword);
 
 // Google Authentication
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 
+//  Google OAuth Callback (Handles Redirect from Google)
 router.get(
   "/google/callback",
-  passport.authenticate("google", { session: false, failureRedirect: "/" }),
+  passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    if (!req.user) {
-      return res.status(401).json({ msg: "Authentication failed" });
-    }
-
-    const token = jwt.sign({ userId: req.user.id }, process.env.JWT_SECRET, { expiresIn: "30d" });
-
-    // Set token in a secure httpOnly cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 30 * 24 * 60 * 60 * 1000,
-    });
-
-    res.redirect("http://localhost:5173/dashboard"); // Redirect frontend to dashboard
+    res.redirect("/dashboard");
   }
 );
 
-// Protected Route (Requires Authentication)
-router.get("/dashboard", authMiddleware, (req, res) => {
-  res.status(200).json({ msg: `Welcome, user ID: ${req.user.userId}` });
+router.get("/logout", (req, res) => {
+  req.logOut((err) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.redirect("/");
+  });
 });
-
+router.get("/user",(req,res)=>{
+  res.json(req.user || null);
+})
 module.exports = router;
