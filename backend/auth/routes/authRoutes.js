@@ -32,22 +32,41 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    res.redirect("http://localhost:5173/dashboard"); // ✅ Redirect to frontend
+    const token = jwt.sign(
+      { id: req.user.id, email: req.user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+    });
+
+    res.redirect("http://localhost:5173/dashboard"); // Redirect after setting the cookie
   }
 );
-//google logout
+// Google logout route
 router.get("/logout", (req, res) => {
   req.logout((err) => {
     if (err) return res.status(500).json({ error: "Logout failed" });
 
-    req.session.destroy(() => {
-      res.clearCookie("connect.sid", { path: "/", httpOnly: true, sameSite: "Lax" });
-      return res.status(200).json({ message: "Logged out successfully" });
-    });
+    res.clearCookie("token", { path: "/", httpOnly: true, sameSite: "Lax" });
+
+    return res.status(200).json({ message: "Logged out successfully" });
   });
 });
 
-router.get("/user",(req,res)=>{
-  res.json(req.user || null);
-})
+// Fetch logged-in user's information
+router.get("/user", authMiddleware, (req, res) => {
+  // req.user is attached by authMiddleware after verifying the token
+  res.json({
+    id: req.user.id,
+    username: req.user.username,
+    email: req.user.email,
+    profilePicture: req.user.profilePicture,
+  });
+});
+
 module.exports = router;

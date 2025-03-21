@@ -113,8 +113,18 @@ exports.login = async (req, res) => {
   if (!user.isVerified)
     return res.status(403).json({ msg: "Verify your email before logging in" });
 
-  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
+   // 3. Generate a JWT token
+   const token = jwt.sign(
+    { id: user.id, email: user.email }, // Payload
+    process.env.JWT_SECRET, // Secret key
+    { expiresIn: "1h" } // Token expiration
+  );
+
+  // 4. Send the token to the client
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // Use HTTPS in production
+    sameSite: "Lax",
   });
   res.status(200).json({ token, msg: "Login successful" });
 };
