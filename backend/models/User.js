@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
   resetOTPExpires: { type: Date }, // Expiration time for OTP
   isOTPVerified: { type: Boolean, default: false }, // Track OTP verification
   profilePicture:{type:String,default:""},
-});
+  storageLimit: { type: Number, default: 1 * 1024 * 1024 * 1024 },  
+  usedStorage: { type: Number, default: 0 },  
 
+}, {
+  timestamps: true,
+});
 module.exports = mongoose.model("User", UserSchema);

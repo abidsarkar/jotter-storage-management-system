@@ -231,6 +231,30 @@ exports.resetPassword = async (req, res) => {
   });
   res.status(200).json({ msg: "Password reset successful" });
 };
+// 📌 Change Password
+exports.changePassword = async (req, res) => {
+  const { currentPassword, newPassword, confirmNewPassword } = req.body;
+
+  if (newPassword !== confirmNewPassword)
+    return res.status(400).json({ msg: "New passwords do not match" });
+
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) return res.status(404).json({ msg: "User not found" });
+
+    // Check if the current password is correct
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Current password is incorrect" });
+
+    // Hash and update the new password
+    user.password = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    res.status(200).json({ msg: "Password changed successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: "Server error, please try again" });
+  }
+};
 // 🔹 Get User Information (After Login)
 exports.getUserProfile = async (req, res) => {
   try {
@@ -245,38 +269,6 @@ exports.getUserProfile = async (req, res) => {
   } catch (error) {
     res.status(500).json({ msg: "Server error" });
   }
-};
-// 🔹 Google Login Redirect
-exports.googleLogin = passport.authenticate("google", { scope: ["profile", "email"] });
-
-// 🔹 Google OAuth Callback
-exports.googleCallback = (req, res, next) => {
-  passport.authenticate("google", { failureRedirect: "/" }, (err, user, info) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      return res.status(401).json({ msg: "Google authentication failed" });
-    }
-
-    // Generate a JWT token
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "10d" }
-    );
-
-    // Set the token as a cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
-      maxAge: 10 * 24 * 60 * 60 * 1000, // 10 days
-    });
-
-    // Redirect to the dashboard
-    res.redirect("http://localhost:5173/dashboard");
-  })(req, res, next);
 };
 
 exports.logout = (req, res) => {

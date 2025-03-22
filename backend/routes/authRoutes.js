@@ -8,10 +8,10 @@ const {
   verifyResetOTP,
   resetPassword,
   getUserProfile,
-  googleLogin,
-  googleCallback,
+  changePassword,
   logout,
 } = require("../controllers/auth/authController");
+const { googleLogin, googleCallback } = require("../controllers/auth/googleAuthControllers");
 const authMiddleware = require("../middleware/authMiddleware");
 
 const router = express.Router();
@@ -22,10 +22,12 @@ router.post("/verify-email", verifyEmail);
 router.post("/login", login);
 router.post("/request-reset", requestPasswordReset);
 router.post("/verify-otp", verifyResetOTP);
-router.post("/reset-password", resetPassword);
+router.post("/reset-password",authMiddleware, resetPassword);
+router.post("/change-password", authMiddleware, changePassword);
 router.get("/profile", authMiddleware, getUserProfile);
 
 // Google Authentication
+
 router.get("/google", googleLogin);
 router.get("/google/callback", googleCallback);
 

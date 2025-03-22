@@ -3,6 +3,7 @@ const cors = require("cors");
 const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js")
+const fileRoutes = require("./routes/fileRoutes.js")
 const passport = require("./config/passport.js");
 require("dotenv").config();
 
@@ -27,9 +28,8 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 app.use("/api/auth", authRoutes);
-const fileRoutes = require("./fileSystem/routes/fileRoutes"); // Import file routes
 
-app.use("/api/files", fileRoutes); // Add file routes
+app.use('/api/files', fileRoutes);
 app.use('/api/profile', profileRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
