@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -28,7 +28,7 @@ const sendEmail = async (email, subject, htmlContent) => {
 const loadTemplate = (templateName, replacements) => {
   let templatePath = path.join(
     __dirname,
-    "../emailTemplate",
+    "../../emailTemplate",
     `${templateName}.html`
   );
   let emailTemplate = fs.readFileSync(templatePath, "utf8");
