@@ -1,17 +1,13 @@
 import React from 'react';
-import { useGetUserQuery } from '../../../store/api';
-
-
 const GoogleLoginButton = () => {
-  const { data, isLoading, isError } = useGetUserQuery();
+ 
 
   const handleGoogleLogin = () => {
     // Redirect to the Google login endpoint
-    window.location.href = `${import.meta.env.VITE_BASE_URL}/google`;
+    window.location.href = `${import.meta.env.VITE_BASE_URL_AUTH}/google`;
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading Google login</p>;
+  
 
   return (
     <button

@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useLoginMutation } from '../../store/api';
+import { useGetUserQuery, useLoginMutation } from '../../store/api';
 import { useNavigate } from 'react-router';
 import Cookies from 'js-cookie';
-import GoogleLoginButton from './Google/GoogleLoginButton';
- // Import Google login button
+import GoogleLoginButton from './Google/GoogleLoginButton'; // Import Google login button
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const navigate = useNavigate();
+
+  // Fetch user data
+  const { data: user, isLoading: isUserLoading, isError } = useGetUserQuery();
+
+  // Redirect to dashboard if user is already authenticated
+  useEffect(() => {
+    if (user) {
+      navigate('/dashboard');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,16 +31,10 @@ const Login = () => {
     }
   };
 
-  const checkAuth = () => {
-    const token = Cookies.get('token');
-    if (token) {
-      navigate('/dashboard');
-    }
-  };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
+  // Show loading state while checking user authentication
+  if (isUserLoading) {
+    return <div>Loading...</div>; // Replace with your preferred loading UI
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
@@ -43,6 +46,7 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
+          required
         />
         <input
           type="password"
@@ -50,13 +54,14 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded-lg"
+          required
         />
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoginLoading}
           className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition duration-300"
         >
-          {isLoading ? 'Logging in...' : 'Login'}
+          {isLoginLoading ? 'Logging in...' : 'Login'}
         </button>
       </form>
       <button
