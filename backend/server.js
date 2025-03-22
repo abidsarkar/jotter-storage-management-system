@@ -4,6 +4,7 @@ const connectDB = require("./config/db.js");
 const authRoutes = require("./routes/authRoutes.js");
 const profileRoutes = require("./routes/profileRoutes.js")
 const fileRoutes = require("./routes/fileRoutes.js")
+const favoriteRoutes = require("./routes/favoriteRoutes.js")
 const passport = require("./config/passport.js");
 require("dotenv").config();
 
@@ -28,7 +29,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 app.use("/api/auth", authRoutes);
-
+app.use("/api/favorite", favoriteRoutes);
 app.use('/api/files', fileRoutes);
 app.use('/api/profile', profileRoutes);
 const PORT = process.env.PORT || 5000;
