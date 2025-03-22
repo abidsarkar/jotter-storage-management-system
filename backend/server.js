@@ -1,10 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./auth/config/db");
-const authRoutes = require("./auth/routes/authRoutes");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-const passport = require("./auth/config/passport.js");
+const connectDB = require("./config/db.js");
+const authRoutes = require("./routes/authRoutes.js");
+const profileRoutes = require("./routes/profileRoutes.js")
+const passport = require("./config/passport.js");
 require("dotenv").config();
 
 // Connect to Database
@@ -23,31 +22,14 @@ app.use(
 app.use(express.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
-// Session middleware
-app.use(
-    session({
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URI, // Your MongoDB connection URI
-        ttl: 14 * 24 * 60 * 60, // Session expiration time (14 days)
-      }),
-      cookie: {
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
-        httpOnly: true,
-        sameSite: "Lax",
-        secure: process.env.NODE_ENV === "production", // Ensure cookies are only sent over HTTPS in production
-      },
-    })
-  );
+
 
 app.use(passport.initialize());
-app.use(passport.session());
+
 app.use("/api/auth", authRoutes);
 const fileRoutes = require("./fileSystem/routes/fileRoutes"); // Import file routes
 
 app.use("/api/files", fileRoutes); // Add file routes
-
+app.use('/api/profile', profileRoutes);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
