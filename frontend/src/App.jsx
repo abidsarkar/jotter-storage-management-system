@@ -9,7 +9,11 @@ import OTPVerification from './components/Auth/OTPVerification';
 import ResetPassword from './components/Auth/ResetPassword';
 import VerifyEmail from './components/Auth/VerifyEmail';
 import Dashboard from './components/Dashboard';
-import StorageStats from './components/folder/StorageStats';
+import ProfileMain from './components/profile/ProfileMain';
+import ProfileSetting from './components/profile/ProfileSetting';
+import ProfileEdit from './components/profile/ProfileEdit';
+import ProfileSupport from './components/profile/ProfileSupport';
+
 
 function App() {
   return (
@@ -25,9 +29,15 @@ function App() {
 
       {/* Dashboard Route */}
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/abcd" element={<StorageStats />} />
-
       {/* Fallback Route */}
+      {/* <Route path="/folder" element={<Folder />} />
+        <Route path="/favourite" element={<Favourite />} />
+        <Route path="/calendar-search" element={<CalendarSearch />} />
+        */}
+        <Route path="/profile" element={<ProfileMain />} /> 
+        <Route path="/profileSetting" element={<ProfileSetting />} /> 
+        <Route path="/profileEdit" element={<ProfileEdit />} /> 
+        <Route path="/ProfileSupport" element={<ProfileSupport />} /> 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

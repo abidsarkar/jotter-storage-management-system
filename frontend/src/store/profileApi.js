@@ -12,6 +12,7 @@ export const profileApi = createApi({
         url: "/edit-profile",
         method: "PUT",
         body: { username },
+        credentials:"include",
       }),
     }),
     deleteAccount: builder.mutation({

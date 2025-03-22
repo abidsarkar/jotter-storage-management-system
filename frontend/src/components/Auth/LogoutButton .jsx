@@ -13,6 +13,9 @@ const LogoutButton = () => {
 
       // Redirect to the home page after successful logout
       navigate('/');
+
+      // Refresh the page to reset the application state
+      window.location.reload();
     } catch (err) {
       console.error('Logout failed:', err);
       // Optionally, show an error message to the user

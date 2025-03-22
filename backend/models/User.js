@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   resetOTP: { type: String }, // OTP for password reset
   resetOTPExpires: { type: Date }, // Expiration time for OTP
   isOTPVerified: { type: Boolean, default: false }, // Track OTP verification
-  profilePicture:{type:String,default:""},
+  profilePicture:{type:String,default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"},
   storageLimit: { type: Number, default: 1 * 1024 * 1024 * 1024 },  
   usedStorage: { type: Number, default: 0 },  
 
