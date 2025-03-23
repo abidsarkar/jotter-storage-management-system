@@ -1,0 +1,1037 @@
+{
+	"info": {
+		"_postman_id": "3186ecf4-bc49-4e97-9eee-55cddec20ac3",
+		"name": "Jotter Authentication API",
+		"description": "This is a api testing for Jotter storage management system app. Use your own id and genarated jwt token for testing. The Api is secure with jwt tokken use as Cookies. Dont forget to send it with neccesasry request path",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40417205"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"abid sarkar 2\",\n    \"email\": \"abidsarker.61@gmail.com\",\n    \"password\": \"Test@1234\",\n    \"confirmPassword\": \"Test@1234\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email with otp",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abidsarker.61@gmail.com\",\n    \"code\": \"922866\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/verify-email",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify-email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abidsarkar499@gmail.com\",\n    \"password\": \"Test@1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Request Password Reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"abidsarkar499@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/request-reset",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"request-reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify otp for forgot pass",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"abidsarkar499@gmail.com\",\r\n    \"otp\": \"636663\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/verify-otp",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"verify-otp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"your_reset_token_here\",\n    \"newPassword\": \"NewTest@1234\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/reset-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\": \"Test@1234\",\n    \"newPassword\": \"NewTest@1234\",\n    \"confirmNewPassword\": \"NewTest@1234\"\n\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/auth/change-password",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "profile information",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1Nzc0NzEsImV4cCI6MTc0NTE2OTQ3MX0.qmxnnpJ1HWh0ibJQqA3MC-PhVpLqb2qkqdOOrnqc4QY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/auth/profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete profile",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2MzM4ODYsImV4cCI6MTc0NTIyNTg4Nn0.DQceIyNsBULv8iSj6581WEQYc3HGICWvZF8MTvxp7Ck",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/profile/delete-account",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"delete-account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit profile",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "payload",
+									"value": "{}",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2MzM4ODYsImV4cCI6MTc0NTIyNTg4Nn0.DQceIyNsBULv8iSj6581WEQYc3HGICWvZF8MTvxp7Ck",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"NewUsername\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/profile/edit-profile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"profile",
+								"edit-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Files",
+			"item": [
+				{
+					"name": "Create folder",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"folderName\": \"My test folder 3\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/create-folder",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"create-folder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/USER/Desktop/test note.txt"
+								},
+								{
+									"key": "folder",
+									"value": "My test folder 2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all files",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NzM2NjUsImV4cCI6MTc0NTI2NTY2NX0.ZVfG-m_SeAWLRHDCFeoyGknWgqNG84M8IjaLpcLo8Uc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/all",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get recent file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/recent",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"recent"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get a signle file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/single/67def86e536b9f560f7ceaaa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"single",
+								"67def86e536b9f560f7ceaaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/deleteOne/67def86e536b9f560f7ceaaa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"deleteOne",
+								"67def86e536b9f560f7ceaaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rename a file",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"newFilename\": \"updated_filename.png\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/files/rename/67def86e536b9f560f7ceaaa",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"rename",
+								"67def86e536b9f560f7ceaaa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Images",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get pdfs",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/pdfs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"pdfs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Notes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/notes",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"notes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get folders",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/folders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"folders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user storage use",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/getTotalUsagesStorageCount",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"getTotalUsagesStorageCount"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total files and folder",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/files/totalFile",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"files",
+								"totalFile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorite and calander",
+			"item": [
+				{
+					"name": "search by date",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/favorite/date/2025-3-23",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"date",
+								"2025-3-23"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "toggle favorite",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isFavorite\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/favorite/toggleFavorite/67def846536b9f560f7ceaa7",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"toggleFavorite",
+								"67def846536b9f560f7ceaa7"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get favorite",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/favorite/allFavorites",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"allFavorites"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "header",
+				"value": "{your JWT Token}",
+				"type": "string"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS256",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "payload",
+				"value": "{}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
