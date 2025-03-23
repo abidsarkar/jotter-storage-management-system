@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"abid sarkar 2\",\n    \"email\": \"abidsarker.61@gmail.com\",\n    \"password\": \"Test@1234\",\n    \"confirmPassword\": \"Test@1234\"\n}"
+							"raw": "{\n    \"username\": \"abid sarkar 2\",\n    \"email\": \"{your email}\",\n    \"password\": \"Test@1234\",\n    \"confirmPassword\": \"Test@1234\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/auth/register",
@@ -50,7 +50,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"abidsarker.61@gmail.com\",\n    \"code\": \"922866\"\n}"
+							"raw": "{\n    \"email\": \"{your email}\",\n    \"code\": \"922866\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/auth/verify-email",
@@ -73,7 +73,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"abidsarkar499@gmail.com\",\n    \"password\": \"Test@1234\"\n}",
+							"raw": "{\n    \"email\": \"{your email}\",\n    \"password\": \"Test@1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -106,7 +106,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"abidsarkar499@gmail.com\"\n}"
+							"raw": "{\n    \"email\": \"{your email}\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url}}/api/auth/request-reset",
@@ -132,7 +132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"abidsarkar499@gmail.com\",\r\n    \"otp\": \"636663\"\r\n}",
+							"raw": "{\r\n    \"email\": \"{your email}\",\r\n    \"otp\": \"636663\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,7 +188,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							},
 							{
@@ -267,7 +267,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1Nzc0NzEsImV4cCI6MTc0NTE2OTQ3MX0.qmxnnpJ1HWh0ibJQqA3MC-PhVpLqb2qkqdOOrnqc4QY",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -332,7 +332,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2MzM4ODYsImV4cCI6MTc0NTIyNTg4Nn0.DQceIyNsBULv8iSj6581WEQYc3HGICWvZF8MTvxp7Ck",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -397,7 +397,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2MzM4ODYsImV4cCI6MTc0NTIyNTg4Nn0.DQceIyNsBULv8iSj6581WEQYc3HGICWvZF8MTvxp7Ck",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							},
 							{
@@ -444,7 +444,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -481,7 +481,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -524,7 +524,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NzM2NjUsImV4cCI6MTc0NTI2NTY2NX0.ZVfG-m_SeAWLRHDCFeoyGknWgqNG84M8IjaLpcLo8Uc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -552,7 +552,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -583,7 +583,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -600,7 +600,7 @@
 								"api",
 								"files",
 								"single",
-								"67def86e536b9f560f7ceaaa"
+								":id"
 							]
 						}
 					},
@@ -633,7 +633,7 @@
 								"api",
 								"files",
 								"deleteOne",
-								"67def86e536b9f560f7ceaaa"
+								":fileid"
 							]
 						}
 					},
@@ -649,7 +649,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -663,7 +663,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/files/rename/67def86e536b9f560f7ceaaa",
+							"raw": "{{base_url}}/api/files/rename/:fileID",
 							"host": [
 								"{{base_url}}"
 							],
@@ -671,7 +671,7 @@
 								"api",
 								"files",
 								"rename",
-								"67def86e536b9f560f7ceaaa"
+								":fileid"
 							]
 						}
 					},
@@ -687,7 +687,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -715,7 +715,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -743,7 +743,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -771,7 +771,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -799,7 +799,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -827,7 +827,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -860,7 +860,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -899,7 +899,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],
@@ -913,7 +913,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/api/favorite/toggleFavorite/67def846536b9f560f7ceaa7",
+							"raw": "{{base_url}}/api/favorite/toggleFavorite/:fileId",
 							"host": [
 								"{{base_url}}"
 							],
@@ -921,7 +921,7 @@
 								"api",
 								"favorite",
 								"toggleFavorite",
-								"67def846536b9f560f7ceaa7"
+								":fileid"
 							],
 							"query": [
 								{
@@ -944,7 +944,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGVlOTYyODIwYjZlZWY4NzVkODc4YSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI2NjkzNDEsImV4cCI6MTc0NTI2MTM0MX0.W4tjxfOJXRECmGrtHvKH32Pwr1XJx4p8YdVhb9b2UF4",
+								"value": "Bearer {your jwt token}",
 								"type": "text"
 							}
 						],

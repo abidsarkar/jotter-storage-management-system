@@ -1,12 +1,57 @@
-# React + Vite
+# Jotter Storage Management System - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Introduction
+This is the frontend part of the Jotter Storage Management System. It is responsible for the user interface and interaction with the backend services.
 
-Currently, two official plugins are available:
+## Prerequisites
+- Node.js
+- npm or yarn
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/abidsarkar/jotter-storage-management-system
+    ```
+2. Navigate to the frontend directory:
+    ```sh
+    cd frontend
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+    or
+    ```sh
+    yarn install
+    ```
 
-## Expanding the ESLint configuration
+## Running the Application
+To start the development server, run:
+```sh
+npm start
+```
+or
+```sh
+yarn start
+```
+The application will be available at `http://localhost:5173`.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Building for Production
+To build the application for production, run:
+```sh
+npm run build
+```
+or
+```sh
+yarn build
+```
+The production-ready files will be in the `build` directory.
+
+## Contributing
+Contributions are welcome! Please read the [contributing guidelines](../CONTRIBUTING.md) first.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](../LICENSE) file for details.
+
+## Contact
+For any inquiries, please visit my website [Abid sarkar portfolio](https://www.abidsarkar100.xyz/).

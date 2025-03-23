@@ -1,0 +1,3 @@
+VITE_BASE_URL_AUTH = http://localhost:5000/api/auth
+VITE_BASE_URL_PROFILE = http://localhost:5000/api/profile
+VITE_BASE_URL_FOLDER = http://localhost:5000/api/filles
