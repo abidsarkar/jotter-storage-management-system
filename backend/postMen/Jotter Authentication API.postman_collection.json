@@ -616,7 +616,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZGQ5YTZmOWQyYjE2MDQ2YmEwZmIzOSIsImVtYWlsIjoiYWJpZHNhcmthcjQ5OUBnbWFpbC5jb20iLCJpYXQiOjE3NDI1OTA4MjAsImV4cCI6MTc0NTE4MjgyMH0.qmIO8abJGoKmS_xsU4JZlpxcPjXqJ3ufU27WTialBIc",
+								"value": "Bearer  {your jwt token}",
 								"type": "text"
 							}
 						],
