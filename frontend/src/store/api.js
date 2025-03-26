@@ -55,7 +55,7 @@ export const authApi = createApi({
       query: () => ({
         url: "/profile",
         method: "GET",
-        credentials:"include",
+        credentials: "include",
       }),
     }),
     googleLogin: builder.query({
@@ -72,6 +72,14 @@ export const authApi = createApi({
         credentials: "include",
       }),
     }),
+    changePassword: builder.mutation({
+      query: ({ currentPassword, newPassword, confirmNewPassword }) => ({
+        url: "/change-password",
+        method: "POST",
+        body: { currentPassword, newPassword, confirmNewPassword },
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -85,4 +93,5 @@ export const {
   useGetUserQuery,
   useGoogleLoginQuery,
   useLogoutMutation,
+  useChangePasswordMutation
 } = authApi;

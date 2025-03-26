@@ -237,7 +237,9 @@ exports.changePassword = async (req, res) => {
 
   if (newPassword !== confirmNewPassword)
     return res.status(400).json({ msg: "New passwords do not match" });
-
+  if (newPassword.length < 6) {
+    return res.status(400).json({ msg: "Password is too short. Make it 6 or more characters." });
+  }
   try {
     const user = await User.findById(req.user.id);
     if (!user) return res.status(404).json({ msg: "User not found" });

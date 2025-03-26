@@ -13,6 +13,7 @@ import ProfileMain from './components/profile/ProfileMain';
 import ProfileSetting from './components/profile/ProfileSetting';
 import ProfileEdit from './components/profile/ProfileEdit';
 import ProfileSupport from './components/profile/ProfileSupport';
+import ChangePassword from './components/profile/profileSettings/ChangePassword';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path="/profileSetting" element={<ProfileSetting />} /> 
         <Route path="/profileEdit" element={<ProfileEdit />} /> 
         <Route path="/ProfileSupport" element={<ProfileSupport />} /> 
+        <Route path="/passwordChange" element={<ChangePassword />} /> 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
