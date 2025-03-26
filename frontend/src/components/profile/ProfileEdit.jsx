@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import { useGetUserQuery } from "../../store/api";
-import { useEditProfileMutation } from "../../store/profileApi";
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
   const { data: user, isLoading, isError } = useGetUserQuery();
-  const [editProfile] = useEditProfileMutation(); // Mutation hook for editing the profile
+
   const [userName, setUserName] = useState(user?.username || ""); // Initialize with current username
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   // Redirect to login if there's an error or no user data
   if (isError || (!isLoading && !user)) {
     navigate("/login");
   }
-
   // Show a loading message while fetching data
   if (isLoading) {
     return <p>Loading user data...</p>;
@@ -23,17 +24,23 @@ const ProfileEdit = () => {
   // Handle form submission
   const handleSubmitForm = async (e) => {
     e.preventDefault();
-  
+    setLoading(true);
+    setError(null);
     try {
       // Pass only the username value (not wrapped in an object)
-      const response = await editProfile({ username: userName }).unwrap();
-  
-      // Handle success
-      alert(response.msg); // Show success message
-      setUserName(response.user.username); // Update the username in the state
+      const response = await axios.put(
+        "http://localhost:5000/api/profile/edit-profile", // Send ID in URL
+        {
+          username: userName,
+        },
+        { withCredentials: true } // ✅ Include cookies for authentication
+      );
     } catch (error) {
-      // Handle error
-      alert(error.data?.msg || "Something went wrong"); // Show error message
+      if (axios.isAxiosError(err)) {
+        setError(err.msg || "axios get data error error");
+      } else {
+        setError("something went wrong");
+      }
     }
   };
   return (
