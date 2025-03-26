@@ -11,7 +11,7 @@ export const profileApi = createApi({
       query: (username) => ({
         url: "/edit-profile",
         method: "PUT",
-        body: { username },
+        body:  username ,
         credentials:"include",
       }),
     }),
@@ -19,6 +19,7 @@ export const profileApi = createApi({
       query: () => ({
         url: "/delete-account",
         method: "DELETE",
+        credentials:"include",
       }),
     }),
   }),

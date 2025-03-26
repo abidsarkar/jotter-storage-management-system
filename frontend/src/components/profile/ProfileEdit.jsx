@@ -3,10 +3,12 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import Navbar from "../Navbar/Navbar";
 import { useGetUserQuery } from "../../store/api";
+import { useEditProfileMutation } from "../../store/profileApi";
 
 const ProfileEdit = () => {
   const navigate = useNavigate();
   const { data: user, isLoading, isError } = useGetUserQuery();
+  const [editProfile, { isLoadingg, isErrorr, isSuccess }] = useEditProfileMutation();
 
   const [userName, setUserName] = useState(user?.username || ""); // Initialize with current username
   const [error, setError] = useState(null);
@@ -20,29 +22,37 @@ const ProfileEdit = () => {
   if (isLoading) {
     return <p>Loading user data...</p>;
   }
+const handleSubmitForm = async (e)=>{
+  e.preventDefault();
+  try{
+    await editProfile({username:userName})
+  }catch(err){
+    console.log(err.msg);
+  }
 
+}
   // Handle form submission
-  const handleSubmitForm = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    try {
-      // Pass only the username value (not wrapped in an object)
-      const response = await axios.put(
-        "http://localhost:5000/api/profile/edit-profile", // Send ID in URL
-        {
-          username: userName,
-        },
-        { withCredentials: true } // ✅ Include cookies for authentication
-      );
-    } catch (error) {
-      if (axios.isAxiosError(err)) {
-        setError(err.msg || "axios get data error error");
-      } else {
-        setError("something went wrong");
-      }
-    }
-  };
+  // const handleSubmitForm = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setError(null);
+  //   try {
+  //     // Pass only the username value (not wrapped in an object)
+  //     const response = await axios.put(
+  //       "http://localhost:5000/api/profile/edit-profile", // Send ID in URL
+  //       {
+  //         username: userName,
+  //       },
+  //       { withCredentials: true } // ✅ Include cookies for authentication
+  //     );
+  //   } catch (error) {
+  //     if (axios.isAxiosError(err)) {
+  //       setError(err.msg || "axios get data error error");
+  //     } else {
+  //       setError("something went wrong");
+  //     }
+  //   }
+  // };
   return (
     <div className="flex flex-col justify-center items-center gap-5">
       <div className="flex flex-col items-center">
